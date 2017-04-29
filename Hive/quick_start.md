@@ -13,7 +13,7 @@
 ### 2.1 通过hive获取手机APP使用数据
 > 借鉴自董峰池师兄的[自行车项目快速入门](https://github.com/FengchiCrazy/bicycle_project/blob/master/quick_start.md)
 
-#### 查询数据并导出
+#### 2.1.1查询数据并导出
 通过一个例子来讲述一下Hive获取手机APP使用数据的过程，对于HQL语言，可以暂时理解为SQL，后文会具体介绍其区别。
 
 | 步骤 | 语句 | 解释 |
@@ -33,7 +33,7 @@
 - `"use mobile; select * from mobile limit 10;"` 用引号括起来的HQL代码，因为前文指定了选项`-e`所以会执行这段代码
 - `> result.csv` 导出到文件，`>`箭头表示输出到后面这个文件中，若文件不存在将会创建，存在则会覆盖
 
-#### 执行文件中的查询语句
+#### 2.1.2执行文件中的查询语句
 那么问题来了，这里HQL语句比较短，可以直接写在`hive -e`命令后面。那么如果我想做一个复杂一点的查询，不仅仅有`SELECT * FROM`，还要有`CASE WHEN`、`LEFT JOIN`、`WHERE`、`GROUP BY`和`ORDER BY`怎么办？
 
 我们当然可以在本地写好复制到命令行中，但更为理想的解决方案是写一个`.hql`的脚本文件，然后上传到服务器，让hive读取它并执行。
@@ -48,6 +48,8 @@
 
 这部分内容能够让大家重建数据库并导入数据~
 
+#### 2.2.1 原始数据说明
+
 原始数据以文本文件的形式存储在目录`/home/mobile/mobile_data/`中（已脱敏），里面有
 
 |文件名|说明|
@@ -56,9 +58,13 @@
 |app_class.csv| 共两列。第一列是appid，第二列是4000多个常用APP所属类别（如视频类、游戏类、社交类等），用英文字母a~t表示，不常用APP所属类别未知|
 |app_class_catelog.csv| 共两列，第一列表示APP所属类别（a~t及未知），第二列是数字1~21 |
 
+#### 2.2.2 导入数据到Hive中
+创建数据库并导入数据就很简单了，和SQL语句一样，执行代码[01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql)即可
 
+具体来说，将[01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql)
+上传至服务器中，并在Linux命令行下输入`hive -f 01_Import.hql`就完成了数据导入工作
 
-### 2.3 使用hql进行描述性分析和
+### 2.3 使用Hive进行描述性分析
 
 
 

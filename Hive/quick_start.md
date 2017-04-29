@@ -59,10 +59,12 @@
 |app_class_catelog.csv| 共两列，第一列表示APP所属类别（a~t及未知），第二列是数字1~21 |
 
 #### 2.2.2 导入数据到Hive中
-创建数据库并导入数据就很简单了，和SQL语句一样，执行代码[01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql)即可
+创建数据库并导入数据只需要执行代码[01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql)即可
 
-具体来说，将[01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql)
-上传至服务器中，并在Linux命令行下输入`hive -f 01_Import.hql`就完成了数据导入工作
+具体来说，就是将 [01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql)
+上传至服务器中，并在Linux命令行下输入`hive -f 01_Import.hql`，数据导入工作就完成了，是不是很简单~
+
+当然这块的主要难度在于hql代码的编写，这和SQL创建表的命令一样，具体可以看[01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql)
 
 ### 2.3 使用Hive进行描述性分析
 

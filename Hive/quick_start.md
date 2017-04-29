@@ -2,18 +2,18 @@
 王梦天-2017/4/29
 > 本文认为读者均具备连接Linux服务器的能力并熟悉基本命令
 
-## 1. Hive是什么
+## 1 Hive是什么
 - Hive在hadoop中相当于数据仓库的角色，本质是**将SQL转换为MapReduce程序**
 - 可以实现通过 HQL（类似于 SQL 的查询语言）来进行数据汇总、查询和数据分析。
 - 对我们来说，可以实现就算不了解 Java 或 MapReduce，也能够使用 Hive 来查询这些数据。避免了去写Map/Reduce，减少学习成本。
 
-## 2. hive快速上手
+## 2 hive快速上手
 以《大数据挖掘与机器学习》一书中的mobile数据（手机APP使用数据）为例,平台为学院的阿里云服务器
 
 ### 2.1 通过hive获取手机APP使用数据
 > 借鉴自董峰池师兄的[自行车项目快速入门](https://github.com/FengchiCrazy/bicycle_project/blob/master/quick_start.md)
 
-#### 2.1.1查询数据并导出
+#### 2.1.1 查询数据并导出
 通过一个例子来讲述一下Hive获取手机APP使用数据的过程，对于HQL语言，可以暂时理解为SQL，后文会具体介绍其区别。
 
 | 步骤 | 语句 | 解释 |
@@ -33,7 +33,7 @@
 - `"use mobile; select * from mobile limit 10;"` 用引号括起来的HQL代码，因为前文指定了选项`-e`所以会执行这段代码
 - `> result.csv` 导出到文件，`>`箭头表示输出到后面这个文件中，若文件不存在将会创建，存在则会覆盖
 
-#### 2.1.2执行文件中的查询语句
+#### 2.1.2 执行文件中的查询语句
 那么问题来了，这里HQL语句比较短，可以直接写在`hive -e`命令后面。那么如果我想做一个复杂一点的查询，不仅仅有`SELECT * FROM`，还要有`CASE WHEN`、`LEFT JOIN`、`WHERE`、`GROUP BY`和`ORDER BY`怎么办？
 
 我们当然可以在本地写好复制到命令行中，但更为理想的解决方案是写一个`.hql`的脚本文件，然后上传到服务器，让hive读取它并执行。
@@ -62,9 +62,22 @@
 创建数据库并导入数据只需要执行代码 [01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql) 即可
 
 具体来说，就是将 [01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql)
-上传至服务器中，并在Linux命令行下输入`hive -f 01_Import.hql`，数据导入工作就完成了，是不是很简单~
+上传至服务器中，并在Linux命令行下输入`hive -f 01_Import.hql`，数据导入工作就完成了，是不是很简单\~
 
 当然这块的核心在于hql代码的编写，这和SQL创建表的命令一样，具体可以看 [01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql)
 
 ### 2.3 使用Hive进行描述性分析
-我们一开始就说Hive的本质是将**SQL转换为MapReduce程序**，也就是说利用Hive我们可以通过编写SQL语句完成MapReduce程序，以大大提高运算效率。
+
+在数据量庞大的时候，单线程遍历一次数据会非常耗时，这时候我们就可以使用Hive来做一些预处理和描述性的分析。
+
+我们一开始就说Hive的本质是将**SQL转换为MapReduce程序**，也就是说利用Hive我们可以通过编写SQL语句完成MapReduce程序，以大大提高运算效率~
+
+这里我们实现《大数据挖掘与机器学习》中P198图10-1和表10-2的描述性分析。
+
+用到的hql代码是[02_Description.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/02_Description.hql)
+
+使用`hive -f 02_Description.hql`执行代码很快就完成了，因为这里只是将一系列操作都以View的形式存储下来了，并没有真正执行运算。View其实就是存储下来的sql语句。通过命令`use mobile; show tables;`我们可以在表列表里看到这些名为pro1\~6的View。
+
+当然，要想进行运算只需要执行`hive -e "use mobile; select * from pro2;" > result.csv`即可将pro2的运算结果输出到result.csv文件中。
+
+这时候hive会自动将sql转换为MapReduce程序来进行运算。和简单的查询不同，如此大的数据量进行运算还是需要时间的，但相比单线程遍历已经非常非常快速了！

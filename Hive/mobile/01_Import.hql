@@ -1,4 +1,7 @@
--- 程序B1（Hive 数据预处理）
+-- STEP 0. 建立mobile数据库
+DROP DATABASE IF EXISTS mobile CASCADE;
+CREATE DATABASE mobile;
+
 -- STEP 1. 创建储存数据表结构并将APP使用数据导入表中
 USE mobile;  -- 使用mobile数据库
 DROP TABLE IF EXISTS mobile;  -- 在建立新mobile表格之前删除已有的同名表格 

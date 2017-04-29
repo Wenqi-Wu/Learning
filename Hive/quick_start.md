@@ -8,3 +8,5 @@
 
 ## 运行hql文件
 `hive -f 01_Import.hql`
+
+ hive中的注释是 `--`

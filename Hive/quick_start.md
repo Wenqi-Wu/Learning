@@ -78,6 +78,6 @@
 
 使用`hive -f 02_Description.hql`执行代码很快就完成了，因为这里只是将一系列操作都以View的形式存储下来了，并没有真正执行运算。View其实就是存储下来的sql语句。通过命令`use mobile; show tables;`我们可以在表列表里看到这些名为pro1\~6的View。
 
-当然，要想进行运算只需要执行`hive -e "use mobile; select * from pro2;" > result.csv`即可将pro2的运算结果输出到result.csv文件中。
+执行这些运算也很简单，比如我要执行pro2，在Linux命令行中输入`hive -e "use mobile; select * from pro2;" > result.csv`即可将pro2的运算结果输出到result.csv文件中。
 
 这时候hive会自动将sql转换为MapReduce程序来进行运算。和简单的查询不同，如此大的数据量进行运算还是需要时间的，但相比单线程遍历已经非常非常快速了！

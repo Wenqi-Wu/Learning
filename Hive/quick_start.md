@@ -54,9 +54,9 @@
 
 |文件名|说明|
 |---|---|
-|day20.txt ~ day30.txt| 共11天的APP使用数据，记录了每个用户（以uid唯一标识）每天使用各款APP（以appid为唯一标识）的起始时间、使用时长、上下行流量等，具体说明见《大数据挖掘与机器学习》P198 |
-|app_class.csv| 共两列。第一列是appid，第二列是4000多个常用APP所属类别（如视频类、游戏类、社交类等），用英文字母a~t表示，不常用APP所属类别未知|
-|app_class_catelog.csv| 共两列，第一列表示APP所属类别（a~t及未知），第二列是数字1~21 |
+|day20.txt ~ day30.txt| 共11天的APP使用数据，记录了每个用户（以uid唯一标识）每天使用各款APP（以appid为唯一标识）的起始时间、使用时长、上下行流量等，具体说明见《大数据挖掘与机器学习》P198表10-1 |
+|app_class.csv| 共两列。第一列是appid，第二列是4000多个常用APP所属类别（如视频类、游戏类、社交类等），用英文字母a ~ t表示，不常用APP所属类别未知|
+|app_class_catelog.csv| 共两列，第一列表示APP所属类别（a ~ t及未知），第二列是数字1 ~ 21 |
 
 #### 2.2.2 导入数据到Hive中
 创建数据库并导入数据只需要执行代码 [01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql) 即可
@@ -67,9 +67,4 @@
 当然这块的核心在于hql代码的编写，这和SQL创建表的命令一样，具体可以看 [01_Import.hql](https://github.com/wmtyhwjx/Learning/blob/master/Hive/mobile/01_Import.hql)
 
 ### 2.3 使用Hive进行描述性分析
-
-
-
-`hive -f 01_Import.hql`
-
- hive中的注释是 `--`
+我们一开始就说Hive的本质是将**SQL转换为MapReduce程序**，也就是说利用Hive我们可以通过编写SQL语句完成MapReduce程序，以大大提高运算效率。

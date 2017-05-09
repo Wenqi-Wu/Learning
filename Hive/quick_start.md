@@ -11,7 +11,7 @@
 以《大数据挖掘与机器学习》一书中的mobile数据（手机APP使用数据）为例,平台为学院的阿里云服务器
 
 ### 2.1 通过hive获取手机APP使用数据
-> 本年部分内容借鉴自董峰池师兄的[自行车项目快速入门](https://github.com/FengchiCrazy/bicycle_project/blob/master/quick_start.md)
+> 本文部分内容借鉴自董峰池师兄的[自行车项目快速入门](https://github.com/FengchiCrazy/bicycle_project/blob/master/quick_start.md)
 
 #### 2.1.1 查询数据并导出
 通过一个例子来讲述一下Hive获取手机APP使用数据的过程，对于HQL语言，可以暂时理解为SQL，后文会具体介绍其区别。
